@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Shreya 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 2rem;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      max-width: 90%;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    h1 {
+      color: #e75480;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pop 1.5s ease;
+    }
+
+    #typedText {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      min-height: 300px;
+    }
+
+    .photo {
+      margin-top: 2rem;
+    }
+
+    .photo img {
+      max-width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
+      border-radius: 50% 50% 45% 45%;
+      animation: floatBalloon 8s infinite ease-in-out;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #888;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      50% { transform: translateY(-60vh) rotate(10deg); }
+      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Birthday, Shreya! 🎂</h1>
+    <div id="typedText"></div>
+    <div class="photo">
+      <img src="us.jpg" alt="Photo of us" />
+    </div>
+  </div>
+
+  <!-- Animated Hearts -->
+  <div class="hearts"></div>
+  <script>
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.position = 'absolute';
+      heart.style.top = '100%';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.width = '20px';
+      heart.style.height = '20px';
+      heart.style.backgroundColor = 'pink';
+      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
+      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
+      heartsContainer.appendChild(heart);
+    }
+  </script>
+
+  <!-- Animated Balloons -->
+  <script>
+    for (let i = 0; i < 10; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+  <!-- Typing Effect Script -->
+  <script>
+    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
+
+    let i = 0;
+    function typeEffect() {
+      if (i < message.length) {
+        document.getElementById("typedText").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+      }
+    }
+    window.onload = typeEffect;
+  </script>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Shreya 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 2rem;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      max-width: 90%;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    h1 {
+      color: #e75480;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pop 1.5s ease;
+    }
+
+    #typedText {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      min-height: 300px;
+    }
+
+    .photo {
+      margin-top: 2rem;
+    }
+
+    .photo img {
+      max-width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
+      border-radius: 50% 50% 45% 45%;
+      animation: floatBalloon 8s infinite ease-in-out;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #888;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      50% { transform: translateY(-60vh) rotate(10deg); }
+      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Birthday, Shreya! 🎂</h1>
+    <div id="typedText"></div>
+    <div class="photo">
+      <img src="us.jpg" alt="Photo of us" />
+    </div>
+  </div>
+
+  <!-- Animated Hearts -->
+  <div class="hearts"></div>
+  <script>
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.position = 'absolute';
+      heart.style.top = '100%';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.width = '20px';
+      heart.style.height = '20px';
+      heart.style.backgroundColor = 'pink';
+      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
+      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
+      heartsContainer.appendChild(heart);
+    }
+  </script>
+
+  <!-- Animated Balloons -->
+  <script>
+    for (let i = 0; i < 10; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+  <!-- Typing Effect Script -->
+  <script>
+    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
+
+    let i = 0;
+    function typeEffect() {
+      if (i < message.length) {
+        document.getElementById("typedText").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+      }
+    }
+    window.onload = typeEffect;
+  </script>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Shreya 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 2rem;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      max-width: 90%;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    h1 {
+      color: #e75480;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: pop 1.5s ease;
+    }
+
+    #typedText {
+      font-size: 1.2rem;
+      color: #333;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      min-height: 300px;
+    }
+
+    .photo {
+      margin-top: 2rem;
+    }
+
+    .photo img {
+      max-width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
+      border-radius: 50% 50% 45% 45%;
+      animation: floatBalloon 8s infinite ease-in-out;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #888;
+    }
+
+    @keyframes floatBalloon {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      50% { transform: translateY(-60vh) rotate(10deg); }
+      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Birthday, Shreya! 🎂</h1>
+    <div id="typedText"></div>
+    <div class="photo">
+      <img src="us.jpg" alt="Photo of us" />
+    </div>
+  </div>
+
+  <!-- Animated Hearts -->
+  <div class="hearts"></div>
+  <script>
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.position = 'absolute';
+      heart.style.top = '100%';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.width = '20px';
+      heart.style.height = '20px';
+      heart.style.backgroundColor = 'pink';
+      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
+      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
+      heartsContainer.appendChild(heart);
+    }
+  </script>
+
+  <!-- Animated Balloons -->
+  <script>
+    for (let i = 0; i < 10; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+  <!-- Typing Effect Script -->
+  <script>
+    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
+
+    let i = 0;
+    function typeEffect() {
+      if (i < message.length) {
+        document.getElementById("typedText").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+      }
+    }
+    window.onload = typeEffect;
+  </script>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
