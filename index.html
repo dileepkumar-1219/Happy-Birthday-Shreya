@@ -1,456 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Shreya 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Shreya!</title>
+    <!-- Google Fonts: Inter for general text, Charm for the message -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Charm:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide overflowing animated particles */
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Soft, festive background gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            text-align: center;
+            position: relative; /* Needed for z-indexing of child elements */
+        }
 
-    .container {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 2rem;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-      max-width: 90%;
-      animation: fadeIn 3s ease-in-out;
-    }
+        /* Container for the main birthday message */
+        .message-container {
+            position: relative;
+            z-index: 10; /* Ensure message is always on top of particles */
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly translucent white background for readability */
+            padding: 3rem 4rem; /* Ample padding */
+            border-radius: 20px; /* Rounded corners for a softer look */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            max-width: 90vw; /* Responsive width */
+            box-sizing: border-box; /* Include padding in width calculation */
+            line-height: 1.6; /* Comfortable line spacing */
+            margin: 1rem; /* Margin for smaller screens */
+        }
 
-    h1 {
-      color: #e75480;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      animation: pop 1.5s ease;
-    }
+        /* Styling for the typing birthday message */
+        #birthday-message {
+            font-family: 'Charm', cursive; /* Elegant cursive font */
+            font-size: clamp(1.5rem, 4vw, 3rem); /* Responsive font size: min 1.5rem, ideal 4vw, max 3rem */
+            color: #6a0dad; /* A lovely purple color */
+            white-space: pre-wrap; /* Preserve line breaks and allow text wrapping */
+            margin: 0;
+            padding: 0;
+            min-height: 3rem; /* Prevent layout shift while text is typing */
+            border-right: 2px solid rgba(106, 13, 173, 0.7); /* Blinking cursor effect */
+            animation: blink-caret .75s step-end infinite;
+        }
 
-    #typedText {
-      font-size: 1.2rem;
-      color: #333;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      min-height: 300px;
-    }
+        /* Keyframe animation for the blinking cursor */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(106, 13, 173, 0.7); }
+        }
 
-    .photo {
-      margin-top: 2rem;
-    }
+        /* --- Particle Container --- */
+        /* This div holds all the animated confetti, hearts, and balloons */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicks/interactions to pass through particles */
+            z-index: 5; /* Below the message container */
+        }
 
-    .photo img {
-      max-width: 250px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
+        /* --- Confetti Styling --- */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ffeb3b; /* Default yellow, overridden by JS */
+            border-radius: 50%; /* Circular shape */
+            opacity: 0; /* Starts invisible */
+            animation: fallConfetti var(--duration) linear var(--delay) forwards; /* Custom properties for duration/delay */
+        }
 
-    .balloon {
-      position: absolute;
-      bottom: -150px;
-      width: 60px;
-      height: 80px;
-      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
-      border-radius: 50% 50% 45% 45%;
-      animation: floatBalloon 8s infinite ease-in-out;
-    }
+        /* Keyframe animation for falling confetti */
+        @keyframes fallConfetti {
+            0% { transform: translateY(-10vh) rotateZ(0deg); opacity: 1; } /* Starts above viewport, fully visible */
+            100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; } /* Falls off bottom, rotates, fades out */
+        }
 
-    .balloon::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      width: 2px;
-      height: 20px;
-      background: #888;
-    }
+        /* --- Heart Styling --- */
+        .heart {
+            position: absolute;
+            background-color: #ff69b4; /* Hot pink */
+            width: 20px;
+            height: 20px;
+            opacity: 0; /* Starts invisible */
+            animation: floatHeart var(--duration) ease-out var(--delay) forwards;
+            transform: rotate(-45deg); /* Rotated to form a heart shape */
+        }
+        /* Pseudo-elements to complete the heart shape */
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff69b4;
+            border-radius: 50%; /* Rounded corners for the heart lobes */
+        }
+        .heart::before {
+            top: -10px; /* Position for top-left lobe */
+            left: 0;
+        }
+        .heart::after {
+            top: 0; /* Position for top-right lobe */
+            left: 10px;
+        }
 
-    @keyframes floatBalloon {
-      0% { transform: translateY(0) rotate(0); opacity: 1; }
-      50% { transform: translateY(-60vh) rotate(10deg); }
-      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
-    }
+        /* Keyframe animation for floating hearts */
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(-45deg) scale(0.5); opacity: 0; } /* Starts below viewport, small, invisible */
+            20% { opacity: 1; } /* Becomes visible */
+            100% { transform: translateY(-10vh) rotate(315deg) scale(1.2); opacity: 0; } /* Floats off top, rotates, grows, fades out */
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
+        /* --- Balloon Styling --- */
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: #add8e6; /* Light blue default, overridden by JS */
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Oval shape for balloon */
+            opacity: 0; /* Starts invisible */
+            animation: floatBalloon var(--duration) ease-in-out var(--delay) forwards;
+            box-shadow: inset -5px -5px 5px rgba(0,0,0,0.2); /* Inner shadow for depth */
+        }
 
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
+        /* Balloon string */
+        .balloon::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 30px; /* Length of the string */
+            background-color: rgba(0,0,0,0.3);
+            bottom: -30px; /* Positioned just below the balloon body */
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 50% 50%; /* Rounded bottom for the string */
+        }
+
+        /* Keyframe animation for floating balloons */
+        @keyframes floatBalloon {
+            0% { transform: translateY(100vh) translateX(0) scale(0.5); opacity: 0; } /* Starts below viewport, small, invisible */
+            10% { opacity: 1; } /* Becomes visible */
+            100% { transform: translateY(-20vh) translateX(var(--x-drift)) scale(1.2); opacity: 0; } /* Floats off top, drifts horizontally, grows, fades out */
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Happy Birthday, Shreya! 🎂</h1>
-    <div id="typedText"></div>
-    <div class="photo">
-      <img src="us.jpg" alt="Photo of us" />
+    <!-- This container will hold all the animated confetti, hearts, and balloons -->
+    <div class="particle-container"></div>
+
+    <!-- This container holds the main birthday message -->
+    <div class="message-container">
+        <p id="birthday-message"></p>
     </div>
-  </div>
 
-  <!-- Animated Hearts -->
-  <div class="hearts"></div>
-  <script>
-    const heartsContainer = document.querySelector('.hearts');
-    for (let i = 0; i < 50; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.position = 'absolute';
-      heart.style.top = '100%';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.width = '20px';
-      heart.style.height = '20px';
-      heart.style.backgroundColor = 'pink';
-      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
-      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
-      heartsContainer.appendChild(heart);
-    }
-  </script>
+    <script>
+        // Your personalized birthday message for Shreya.
+        // Use \n for new lines that will be converted to <br> in the HTML.
+        const fullMessage = "Wishing her happiest Birthday Shreya. ❤️\nKeep smiling, may all your dreams come true.\nI have no clue how my life gonna be without you.\nThanks for being with me in all the times.\nLet's keep doing great, together & Forever.\nI love you the most... where the words can't express my feelings.... ❤️";
 
-  <!-- Animated Balloons -->
-  <script>
-    for (let i = 0; i < 10; i++) {
-      const balloon = document.createElement('div');
-      balloon.classList.add('balloon');
-      balloon.style.left = Math.random() * 100 + 'vw';
-      balloon.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(balloon);
-    }
-  </script>
+        const messageElement = document.getElementById('birthday-message');
+        let charIndex = 0;
+        const typingSpeed = 70; // Adjust this value to change typing speed (milliseconds per character)
 
-  <!-- Typing Effect Script -->
-  <script>
-    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
+        /**
+         * Simulates a typewriter effect by appending characters to the message element.
+         * Handles newlines by inserting <br> tags.
+         */
+        function typeWriter() {
+            if (charIndex < fullMessage.length) {
+                const char = fullMessage.charAt(charIndex);
+                if (char === '\n') {
+                    // If it's a newline character, insert a HTML line break
+                    messageElement.innerHTML += '<br>';
+                } else {
+                    // Otherwise, append the character
+                    messageElement.innerHTML += char;
+                }
+                charIndex++;
+                // Continue typing after a delay
+                setTimeout(typeWriter, typingSpeed);
+            } else {
+                // Once typing is complete, remove the blinking cursor
+                messageElement.style.borderRight = 'none';
+            }
+        }
 
-    let i = 0;
-    function typeEffect() {
-      if (i < message.length) {
-        document.getElementById("typedText").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeEffect, 50);
-      }
-    }
-    window.onload = typeEffect;
-  </script>
+        // --- Particle Generation Logic ---
+        const particleContainer = document.querySelector('.particle-container');
 
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Shreya 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
-    }
+        // Define color palettes for each particle type
+        const particleColors = {
+            confetti: ['#ffeb3b', '#8bc34a', '#2196f3', '#f44336', '#9c27b0', '#ff9800', '#00bcd4'], // Bright colors
+            heart: ['#ff69b4', '#ff1493', '#c71585', '#db7093'], // Shades of pink and red
+            balloon: ['#ffc0cb', '#add8e6', '#98fb98', '#ffd700', '#da70d6', '#fdfd96'] // Pastel colors
+        };
 
-    .container {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 2rem;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-      max-width: 90%;
-      animation: fadeIn 3s ease-in-out;
-    }
+        /**
+         * Generates a random number within a specified range.
+         * @param {number} min - The minimum value (inclusive).
+         * @param {number} max - The maximum value (inclusive).
+         * @returns {number} A random number between min and max.
+         */
+        function getRandomValue(min, max) {
+            return Math.random() * (max - min) + min;
+        }
 
-    h1 {
-      color: #e75480;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      animation: pop 1.5s ease;
-    }
+        /**
+         * Creates and appends a new animated particle (confetti, heart, or balloon) to the page.
+         * @param {string} type - The type of particle to create ('confetti', 'heart', or 'balloon').
+         */
+        function createParticle(type) {
+            const particle = document.createElement('div');
+            particle.classList.add(type); // Add the specific CSS class for styling
 
-    #typedText {
-      font-size: 1.2rem;
-      color: #333;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      min-height: 300px;
-    }
+            // Random horizontal starting position (0 to 100 viewport width)
+            const randomLeft = getRandomValue(0, 100);
+            particle.style.left = `${randomLeft}vw`;
 
-    .photo {
-      margin-top: 2rem;
-    }
+            // Random animation duration for varied speeds
+            const randomDuration = getRandomValue(5, 12);
+            particle.style.setProperty('--duration', `${randomDuration}s`);
 
-    .photo img {
-      max-width: 250px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
+            // Random delay to stagger the appearance of particles
+            const randomDelay = getRandomValue(0, 5);
+            particle.style.setProperty('--delay', `${randomDelay}s`);
 
-    .balloon {
-      position: absolute;
-      bottom: -150px;
-      width: 60px;
-      height: 80px;
-      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
-      border-radius: 50% 50% 45% 45%;
-      animation: floatBalloon 8s infinite ease-in-out;
-    }
+            // Assign a random color from the defined palette for the particle type
+            const colors = particleColors[type];
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-    .balloon::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      width: 2px;
-      height: 20px;
-      background: #888;
-    }
+            // Add a random horizontal drift for balloons to make movement more natural
+            if (type === 'balloon') {
+                const randomXDrift = getRandomValue(-50, 50); // Drift up to 50vw left or right
+                particle.style.setProperty('--x-drift', `${randomXDrift}vw`);
+            }
 
-    @keyframes floatBalloon {
-      0% { transform: translateY(0) rotate(0); opacity: 1; }
-      50% { transform: translateY(-60vh) rotate(10deg); }
-      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
-    }
+            particleContainer.appendChild(particle);
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
+            // Remove the particle from the DOM once its animation finishes
+            // This prevents the page from getting cluttered with too many elements
+            particle.addEventListener('animationend', () => {
+                particle.remove();
+            });
+        }
 
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Happy Birthday, Shreya! 🎂</h1>
-    <div id="typedText"></div>
-    <div class="photo">
-      <img src="us.jpg" alt="Photo of us" />
-    </div>
-  </div>
+        // Set intervals to continuously generate particles of each type
+        // Adjust the interval values to control how frequently particles appear
+        setInterval(() => createParticle('confetti'), 300); // More frequent confetti
+        setInterval(() => createParticle('heart'), 800); // Less frequent hearts
+        setInterval(() => createParticle('balloon'), 2500); // Even less frequent balloons
 
-  <!-- Animated Hearts -->
-  <div class="hearts"></div>
-  <script>
-    const heartsContainer = document.querySelector('.hearts');
-    for (let i = 0; i < 50; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.position = 'absolute';
-      heart.style.top = '100%';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.width = '20px';
-      heart.style.height = '20px';
-      heart.style.backgroundColor = 'pink';
-      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
-      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
-      heartsContainer.appendChild(heart);
-    }
-  </script>
-
-  <!-- Animated Balloons -->
-  <script>
-    for (let i = 0; i < 10; i++) {
-      const balloon = document.createElement('div');
-      balloon.classList.add('balloon');
-      balloon.style.left = Math.random() * 100 + 'vw';
-      balloon.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(balloon);
-    }
-  </script>
-
-  <!-- Typing Effect Script -->
-  <script>
-    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
-
-    let i = 0;
-    function typeEffect() {
-      if (i < message.length) {
-        document.getElementById("typedText").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeEffect, 50);
-      }
-    }
-    window.onload = typeEffect;
-  </script>
-
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Shreya 🎉</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to top right, #ffc0cb, #ffe4e1);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
-    }
-
-    .container {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 2rem;
-      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
-      max-width: 90%;
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    h1 {
-      color: #e75480;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      animation: pop 1.5s ease;
-    }
-
-    #typedText {
-      font-size: 1.2rem;
-      color: #333;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      min-height: 300px;
-    }
-
-    .photo {
-      margin-top: 2rem;
-    }
-
-    .photo img {
-      max-width: 250px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
-    .balloon {
-      position: absolute;
-      bottom: -150px;
-      width: 60px;
-      height: 80px;
-      background: radial-gradient(circle, #ff69b4 60%, #ff1493);
-      border-radius: 50% 50% 45% 45%;
-      animation: floatBalloon 8s infinite ease-in-out;
-    }
-
-    .balloon::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      width: 2px;
-      height: 20px;
-      background: #888;
-    }
-
-    @keyframes floatBalloon {
-      0% { transform: translateY(0) rotate(0); opacity: 1; }
-      50% { transform: translateY(-60vh) rotate(10deg); }
-      100% { transform: translateY(-120vh) rotate(-10deg); opacity: 0; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
-
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Happy Birthday, Shreya! 🎂</h1>
-    <div id="typedText"></div>
-    <div class="photo">
-      <img src="us.jpg" alt="Photo of us" />
-    </div>
-  </div>
-
-  <!-- Animated Hearts -->
-  <div class="hearts"></div>
-  <script>
-    const heartsContainer = document.querySelector('.hearts');
-    for (let i = 0; i < 50; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.position = 'absolute';
-      heart.style.top = '100%';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.width = '20px';
-      heart.style.height = '20px';
-      heart.style.backgroundColor = 'pink';
-      heart.style.clipPath = 'polygon(50% 0%, 61% 16%, 98% 16%, 68% 38%, 79% 72%, 50% 56%, 21% 72%, 32% 38%, 2% 16%, 39% 16%)';
-      heart.style.animation = `floatUp 6s ${Math.random() * 5}s infinite ease-in`;
-      heartsContainer.appendChild(heart);
-    }
-  </script>
-
-  <!-- Animated Balloons -->
-  <script>
-    for (let i = 0; i < 10; i++) {
-      const balloon = document.createElement('div');
-      balloon.classList.add('balloon');
-      balloon.style.left = Math.random() * 100 + 'vw';
-      balloon.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(balloon);
-    }
-  </script>
-
-  <!-- Typing Effect Script -->
-  <script>
-    const message = `Happy birthday to the most beautiful person of my life,\n\nHonestly, I don’t even know where to start because words don’t do justice to how much you mean to me.\n\nYou’re not just my girlfriend—you’re my everything. My calm in the chaos, my biggest blessing, and the best thing that’s ever happened to me.\n\nThank you for all the little things you do, the love you give so effortlessly, and for just being you. You’ve brought so much light into my life, and I can’t imagine a day without you in it.\n\nI’m so proud of us, of the way we keep growing, keep loving, and keep shining together. Let’s keep doing that—forever.\n\nHappiest birthday, baby. I love you more than you’ll ever know. ❤️\n\n— Your DK 💖`;
-
-    let i = 0;
-    function typeEffect() {
-      if (i < message.length) {
-        document.getElementById("typedText").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(typeEffect, 50);
-      }
-    }
-    window.onload = typeEffect;
-  </script>
-
-  <!-- Background Music -->
-  <audio autoplay loop>
-    <source src="https://vgmsite.com/soundtracks/remo/bgmlovebug.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+        // Start the typing animation when the entire window content has loaded
+        window.onload = typeWriter;
+    </script>
 </body>
 </html>
