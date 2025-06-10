@@ -10,11 +10,16 @@
         /* General body styling */
         body {
             margin: 0;
-            overflow: hidden; /* Hide overflowing animated particles */
+            overflow-y: auto; /* Allow vertical scrolling when content overflows */
+            overflow-x: hidden; /* Keep horizontal overflow hidden for particles */
             background: linear-gradient(135deg, #f0f8ff, #e6e6fa); /* Soft, festive background gradient */
+            
+            /* Changed to column layout to allow natural vertical flow with horizontal centering */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column; /* Arrange children in a column */
+            justify-content: flex-start; /* Align content to the start (top) of the flex container */
+            align-items: center; /* Center children horizontally */
+            
             min-height: 100vh; /* Full viewport height */
             font-family: 'Inter', sans-serif;
             color: #333;
@@ -34,6 +39,8 @@
             box-sizing: border-box; /* Include padding in width calculation */
             line-height: 1.6; /* Comfortable line spacing */
             margin: 1rem; /* Margin for smaller screens */
+            /* Add some top margin to account for the button at the top */
+            margin-top: 80px; /* Adjust as needed based on button size/position */
         }
 
         /* Styling for the typing birthday message */
@@ -191,7 +198,7 @@
 <body>
     <!-- Music Control Button (moved to top) -->
     <div class="music-button-container">
-        <button id="toggle-music-button" class="music-button">Wishes from... </button>
+        <button id="toggle-music-button" class="music-button">Play Music</button>
     </div>
 
     <!-- This container will hold all the animated confetti, hearts, and balloons -->
@@ -205,8 +212,8 @@
     <!-- Background Music -->
     <!-- IMPORTANT: Replace 'music/your-music-file.mp3' with the actual path to your music file. -->
     <!-- For example, if your file is named 'birthday_song.mp3' in a 'music' folder, use 'music/birthday_song.mp3'. -->
-    <!-- If it's in the same folder as index.html, just use 'birthday_song.mp3'. -->
-    <!-- Removed 'autoplay' attribute, play is now controlled by the button. -->
+    <!-- If your page is loaded over HTTPS, ensure your music file is also loaded via HTTPS. -->
+    <!-- If your music file is served over HTTP while the page is HTTPS, browsers will block it (Mixed Content). -->
     <audio id="background-music" loop volume="0.5">
         <source src="music/bgm.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -328,7 +335,8 @@
                     })
                     .catch(error => {
                         console.error("Error playing audio:", error);
-                        toggleMusicButton.textContent = 'Play Music (Blocked)'; // Inform if blocked
+                        // Provide more specific feedback if play fails, often due to user settings or resource loading.
+                        toggleMusicButton.textContent = 'Play Music (Error/Blocked)';
                     });
             } else {
                 audio.pause();
